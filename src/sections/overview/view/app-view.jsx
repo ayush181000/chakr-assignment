@@ -2,11 +2,12 @@ import { faker } from '@faker-js/faker';
 
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Unstable_Grid2';
-import Typography from '@mui/material/Typography';
+// import Typography from '@mui/material/Typography';
 
 import Iconify from 'src/components/iconify';
 
 import AppTasks from '../app-tasks';
+import AppSemicircle from '../app-semicircle';
 import AppNewsUpdate from '../app-news-update';
 import AppOrderTimeline from '../app-order-timeline';
 import AppCurrentVisits from '../app-current-visits';
@@ -21,45 +22,32 @@ import AppConversionRates from '../app-conversion-rates';
 export default function AppView() {
   return (
     <Container maxWidth="xl">
-      <Typography variant="h4" sx={{ mb: 5 }}>
-        Hi, Welcome back 👋
-      </Typography>
-
-      <Grid container spacing={3}>
-        <Grid xs={12} sm={6} md={3}>
+      <Grid container spacing={2} columns={16}>
+        <Grid xs={12} sm={6} md={6}>
           <AppWidgetSummary
-            title="Weekly Sales"
-            total={714000}
+            heading="Revenues"
+            title="Increase compared to last week"
+            total={15}
+            logo
             color="success"
             icon={<img alt="icon" src="/assets/icons/glass/ic_glass_bag.png" />}
+            link="Revenues Report"
           />
         </Grid>
 
-        <Grid xs={12} sm={6} md={3}>
+        <Grid xs={12} sm={6} md={6}>
           <AppWidgetSummary
-            title="New Users"
-            total={1352831}
+            heading="Lost deals"
+            title="You close 96 out of 100 deals"
+            total={4}
             color="info"
             icon={<img alt="icon" src="/assets/icons/glass/ic_glass_users.png" />}
+            link="All Deals"
           />
         </Grid>
 
-        <Grid xs={12} sm={6} md={3}>
-          <AppWidgetSummary
-            title="Item Orders"
-            total={1723315}
-            color="warning"
-            icon={<img alt="icon" src="/assets/icons/glass/ic_glass_buy.png" />}
-          />
-        </Grid>
-
-        <Grid xs={12} sm={6} md={3}>
-          <AppWidgetSummary
-            title="Bug Reports"
-            total={234}
-            color="error"
-            icon={<img alt="icon" src="/assets/icons/glass/ic_glass_message.png" />}
-          />
+        <Grid xs={12} sm={6} md={4}>
+          <AppSemicircle title="Quarter Goals" subheader="84%" link="All goals" />
         </Grid>
 
         <Grid xs={12} md={6} lg={8}>
