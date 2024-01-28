@@ -7,14 +7,15 @@ import Grid from '@mui/material/Unstable_Grid2';
 import Iconify from 'src/components/iconify';
 
 import AppTasks from '../app-tasks';
+import { customers } from '../customers';
 import AppSemicircle from '../app-semicircle';
-import AppNewsUpdate from '../app-news-update';
 import AppOrderTimeline from '../app-order-timeline';
 import AppCurrentVisits from '../app-current-visits';
 import AppWebsiteVisits from '../app-website-visits';
 import AppWidgetSummary from '../app-widget-summary';
 import AppTrafficBySite from '../app-traffic-by-site';
 import AppCurrentSubject from '../app-current-subject';
+import AppCustomersUpdate from '../app-customers-update';
 import AppConversionRates from '../app-conversion-rates';
 
 // ----------------------------------------------------------------------
@@ -23,7 +24,7 @@ export default function AppView() {
   return (
     <Container maxWidth="xl">
       <Grid container spacing={2} columns={16}>
-        <Grid xs={12} sm={6} md={6}>
+        <Grid xs={16} sm={6} md={6}>
           <AppWidgetSummary
             heading="Revenues"
             title="Increase compared to last week"
@@ -35,7 +36,7 @@ export default function AppView() {
           />
         </Grid>
 
-        <Grid xs={12} sm={6} md={6}>
+        <Grid xs={16} sm={6} md={6}>
           <AppWidgetSummary
             heading="Lost deals"
             title="You close 96 out of 100 deals"
@@ -46,53 +47,15 @@ export default function AppView() {
           />
         </Grid>
 
-        <Grid xs={12} sm={6} md={4}>
+        <Grid xs={16} sm={4} md={4}>
           <AppSemicircle title="Quarter Goals" subheader="84%" link="All goals" />
         </Grid>
 
-        <Grid xs={12} md={6} lg={8}>
-          <AppWebsiteVisits
-            title="Website Visits"
-            subheader="(+43%) than last year"
-            chart={{
-              labels: [
-                '01/01/2003',
-                '02/01/2003',
-                '03/01/2003',
-                '04/01/2003',
-                '05/01/2003',
-                '06/01/2003',
-                '07/01/2003',
-                '08/01/2003',
-                '09/01/2003',
-                '10/01/2003',
-                '11/01/2003',
-              ],
-              series: [
-                {
-                  name: 'Team A',
-                  type: 'column',
-                  fill: 'solid',
-                  data: [23, 11, 22, 27, 13, 22, 37, 21, 44, 22, 30],
-                },
-                {
-                  name: 'Team B',
-                  type: 'area',
-                  fill: 'gradient',
-                  data: [44, 55, 41, 67, 22, 43, 21, 41, 56, 27, 43],
-                },
-                {
-                  name: 'Team C',
-                  type: 'line',
-                  fill: 'solid',
-                  data: [30, 25, 36, 30, 45, 35, 64, 52, 59, 36, 39],
-                },
-              ],
-            }}
-          />
+        <Grid xs={16} md={8} lg={8}>
+          <AppCustomersUpdate title="Customers" list={customers} />
         </Grid>
 
-        <Grid xs={12} md={6} lg={4}>
+        <Grid xs={12} md={6} lg={8}>
           <AppCurrentVisits
             title="Current Visits"
             chart={{
@@ -142,15 +105,44 @@ export default function AppView() {
         </Grid>
 
         <Grid xs={12} md={6} lg={8}>
-          <AppNewsUpdate
-            title="News Update"
-            list={[...Array(5)].map((_, index) => ({
-              id: faker.string.uuid(),
-              title: faker.person.jobTitle(),
-              description: faker.commerce.productDescription(),
-              image: `/assets/images/covers/cover_${index + 1}.jpg`,
-              postedAt: faker.date.recent(),
-            }))}
+          <AppWebsiteVisits
+            title="Website Visits"
+            subheader="(+43%) than last year"
+            chart={{
+              labels: [
+                '01/01/2003',
+                '02/01/2003',
+                '03/01/2003',
+                '04/01/2003',
+                '05/01/2003',
+                '06/01/2003',
+                '07/01/2003',
+                '08/01/2003',
+                '09/01/2003',
+                '10/01/2003',
+                '11/01/2003',
+              ],
+              series: [
+                {
+                  name: 'Team A',
+                  type: 'column',
+                  fill: 'solid',
+                  data: [23, 11, 22, 27, 13, 22, 37, 21, 44, 22, 30],
+                },
+                {
+                  name: 'Team B',
+                  type: 'area',
+                  fill: 'gradient',
+                  data: [44, 55, 41, 67, 22, 43, 21, 41, 56, 27, 43],
+                },
+                {
+                  name: 'Team C',
+                  type: 'line',
+                  fill: 'solid',
+                  data: [30, 25, 36, 30, 45, 35, 64, 52, 59, 36, 39],
+                },
+              ],
+            }}
           />
         </Grid>
 
