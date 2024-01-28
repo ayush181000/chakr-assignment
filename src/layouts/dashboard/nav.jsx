@@ -5,6 +5,7 @@ import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Drawer from '@mui/material/Drawer';
 import Button from '@mui/material/Button';
+import { TextField } from '@mui/material';
 import { alpha } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import ListItemButton from '@mui/material/ListItemButton';
@@ -18,6 +19,7 @@ import { useResponsive } from 'src/hooks/use-responsive';
 import Scrollbar from 'src/components/scrollbar';
 
 import brand from './brand.svg';
+import search from './search.svg';
 import { NAV } from './config-layout';
 import navConfig from './config-navigation';
 
@@ -72,6 +74,27 @@ export default function Nav({ openNav, onCloseNav }) {
     </Box>
   );
 
+  const renderSearchBar = (
+    <Box sx={{ marginBottom: '20px' }}>
+      <TextField
+        id="outlined-basic"
+        value="  Search"
+        variant="outlined"
+        sx={{ marginLeft: '20px' }}
+        size="sm"
+        InputProps={{
+          startAdornment: <img src={search} alt="icon" />,
+          style: {
+            borderRadius: '100px',
+            color: 'grey',
+            height: '40px',
+          },
+          shrink: true,
+        }}
+      />
+    </Box>
+  );
+
   const renderContent = (
     <Scrollbar
       sx={{
@@ -81,10 +104,11 @@ export default function Nav({ openNav, onCloseNav }) {
           display: 'flex',
           flexDirection: 'column',
         },
-        marginBottom: '4px',
       }}
     >
       <img src={brand} alt="logo" />
+
+      {renderSearchBar}
 
       {/* {renderAccount} */}
 
