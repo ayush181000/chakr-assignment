@@ -28,7 +28,9 @@ export default function AppWidgetSummary({
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'flex-start',
-        flex: '1 0 0',
+        flex: '1 1 1',
+        // minHeight: '255px',
+        height: 'auto',
         ...sx,
       }}
       {...other}

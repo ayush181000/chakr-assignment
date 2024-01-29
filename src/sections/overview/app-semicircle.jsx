@@ -32,7 +32,15 @@ export default function AppSemicircle({ title, subheader, list, link, ...other }
         {title}
       </Typography>
 
-      <Box sx={{ width: '209.389px', height: '102px', flexShrink: 0, paddingTop: '20px' }}>
+      <Box
+        sx={{
+          width: '209.389px',
+          height: '102px',
+          flexShrink: 0,
+          paddingTop: '20px',
+          transform: 'translate(44px,0px)',
+        }}
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="209"
