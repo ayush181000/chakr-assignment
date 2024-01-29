@@ -8,11 +8,12 @@ import { Box, Card, Typography } from '@mui/material';
 
 import Iconify from 'src/components/iconify';
 
-import { data } from '../chart';
+// import { data } from '../chart';
 import { chats } from '../chats';
 import AppChat from '../app-chat';
 import AppTasks from '../app-tasks';
 import { customers } from '../customers';
+import AppTopStates from '../app-top-states';
 import AppSemicircle from '../app-semicircle';
 import AppOrderTimeline from '../app-order-timeline';
 import AppWidgetSummary from '../app-widget-summary';
@@ -22,18 +23,18 @@ import AppCustomersUpdate from '../app-customers-update';
 // ----------------------------------------------------------------------
 
 export default function AppView() {
-  const chartData = {
-    labels: data.map((d) => d.Timestamp),
-    datasets: [
-      {
-        label: 'Users Gained ',
-        data: data.map((d) => d['Profit Percentage']),
-        backgroundColor: ['rgba(75,192,192,1)', '#ecf0f1', '#50AF95', '#f3ba2f', '#2a71d0'],
-        borderColor: 'black',
-        borderWidth: 2,
-      },
-    ],
-  };
+  // const chartData = {
+  //   labels: data.map((d) => d.Timestamp),
+  //   datasets: [
+  //     {
+  //       label: 'Users Gained ',
+  //       data: data.map((d) => d['Profit Percentage']),
+  //       backgroundColor: ['rgba(75,192,192,1)', '#ecf0f1', '#50AF95', '#f3ba2f', '#2a71d0'],
+  //       borderColor: 'black',
+  //       borderWidth: 2,
+  //     },
+  //   ],
+  // };
 
   return (
     <Container maxWidth="xl">
@@ -285,7 +286,7 @@ export default function AppView() {
         </Grid>
 
         <Grid lg={5}>
-          <div />
+          <AppTopStates />
         </Grid>
 
         <Grid lg={6}>
