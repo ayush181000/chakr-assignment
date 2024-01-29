@@ -100,7 +100,6 @@ export default function AppView() {
                         padding: '16px',
                         flexDirection: 'column',
                         alignItems: 'flex-start',
-                        gap: '16px',
                         flex: '1 0 0',
                         alignSelf: 'stretch',
                         transform: 'translate(-4px,0px)',
@@ -115,6 +114,7 @@ export default function AppView() {
                           fontWeight: 600,
                           lineHeight: 'normal',
                           letterSpacing: '-0.4px',
+                          mb: '40px',
                         }}
                       >
                         Top month
@@ -128,6 +128,7 @@ export default function AppView() {
                           fontWeight: 600,
                           lineHeight: 'normal',
                           letterSpacing: '-0.2px',
+                          mb: '4px',
                         }}
                       >
                         November
@@ -170,7 +171,7 @@ export default function AppView() {
                           fontWeight: 600,
                           lineHeight: 'normal',
                           letterSpacing: '-0.4px',
-                          mb: '20px',
+                          mb: '40px',
                         }}
                       >
                         Top year
