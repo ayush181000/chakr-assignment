@@ -50,7 +50,7 @@ export default function AppView() {
   useEffect(() => {
     const chartData = aggregateByDate(data);
 
-    console.log(chartData);
+    // console.log(chartData);
 
     const ctx = document.getElementById('myLineChart').getContext('2d');
     const gradient = ctx.createLinearGradient(0, 0, 0, 300);

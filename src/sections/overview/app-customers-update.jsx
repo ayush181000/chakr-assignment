@@ -50,133 +50,135 @@ export default function AppCustomer({ title, list, ...other }) {
   );
 
   return (
-    <Card {...other}>
-      <CardHeader title={sort} />
-      <Scrollbar>
-        <Box spacing={3} sx={{ pl: 1, pt: 1 }}>
-          {list.map((customer) => (
-            <Box
-              onMouseEnter={() => {
-                setVisible(customer.id);
-              }}
-              onMouseLeave={() => {
-                setVisible(-1);
-              }}
-              key={customer.id}
-              sx={
-                ({
-                  display: 'flex',
-                  alignItems: 'center',
-                  alignSelf: 'stretch',
-                },
-                visible === customer.id && { backgroundColor: '#FFF7E8', borderRadius: '14px' })
-              }
-            >
+    <Box>
+      <Card {...other}>
+        <CardHeader title={sort} sx={{ mb: '30px' }} />
+        <Scrollbar>
+          <Box spacing={3} sx={{ pl: 1, pt: 1, mb: '20px' }}>
+            {list.map((customer) => (
               <Box
-                sx={{
-                  display: 'flex',
-                  margin: 0,
-                  padding: '20px',
-                  justifyContent: 'space-between',
+                onMouseEnter={() => {
+                  setVisible(customer.id);
                 }}
+                onMouseLeave={() => {
+                  setVisible(-1);
+                }}
+                key={customer.id}
+                sx={
+                  ({
+                    display: 'flex',
+                    alignItems: 'center',
+                    alignSelf: 'stretch',
+                  },
+                  visible === customer.id && { backgroundColor: '#FFF7E8', borderRadius: '14px' })
+                }
               >
-                <Box sx={{ display: 'flex' }}>
-                  <img
-                    src={customer.img}
-                    alt="avatar"
-                    style={{
-                      width: '32px',
-                      height: '32px',
-                      borderRadius: '100px',
-                      marginRight: '12px',
-                    }}
-                  />
-                  <div style={{ display: 'flex', flexDirection: 'column' }}>
-                    <Typography
-                      sx={{
-                        fontFamily: 'Inter',
-                        fontSize: '14px',
-                        fontStyle: 'normal',
-                        fontWeight: 700,
-                        lineHeight: 'normal',
-                        letterSpacing: '-0.3px',
+                <Box
+                  sx={{
+                    display: 'flex',
+                    margin: 0,
+                    padding: '20px',
+                    justifyContent: 'space-between',
+                  }}
+                >
+                  <Box sx={{ display: 'flex' }}>
+                    <img
+                      src={customer.img}
+                      alt="avatar"
+                      style={{
+                        width: '32px',
+                        height: '32px',
+                        borderRadius: '100px',
+                        marginRight: '12px',
                       }}
-                    >
-                      {customer.name}
-                    </Typography>
-                    <Typography
-                      sx={{
-                        fontFamily: 'Inter',
-                        fontSize: '12px',
-                        fontStyle: 'normal',
-                        fontWeight: 400,
-                        lineHeight: 'normal',
-                        letterSpacing: '-0.3px',
-                      }}
-                    >
-                      {customer.company}
-                    </Typography>
-                  </div>
-                </Box>
-                {visible === customer.id && (
-                  <Box
-                    sx={{
-                      display: 'flex',
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                      gap: '20px',
-                    }}
-                  >
-                    <div>{msg} </div>
-                    <div>{star} </div>
-                    <div>{edit}</div>
-                    <Typography
-                      sx={{ textColor: 'text.disabled', transform: 'translate(0, -4px)' }}
-                    >
-                      {' '}
-                      |{' '}
-                    </Typography>
-                    <div>{dots}</div>
+                    />
+                    <div style={{ display: 'flex', flexDirection: 'column' }}>
+                      <Typography
+                        sx={{
+                          fontFamily: 'Inter',
+                          fontSize: '14px',
+                          fontStyle: 'normal',
+                          fontWeight: 700,
+                          lineHeight: 'normal',
+                          letterSpacing: '-0.3px',
+                        }}
+                      >
+                        {customer.name}
+                      </Typography>
+                      <Typography
+                        sx={{
+                          fontFamily: 'Inter',
+                          fontSize: '12px',
+                          fontStyle: 'normal',
+                          fontWeight: 400,
+                          lineHeight: 'normal',
+                          letterSpacing: '-0.3px',
+                        }}
+                      >
+                        {customer.company}
+                      </Typography>
+                    </div>
                   </Box>
-                )}
+                  {visible === customer.id && (
+                    <Box
+                      sx={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        gap: '20px',
+                      }}
+                    >
+                      <div>{msg} </div>
+                      <div>{star} </div>
+                      <div>{edit}</div>
+                      <Typography
+                        sx={{ textColor: 'text.disabled', transform: 'translate(0, -4px)' }}
+                      >
+                        {' '}
+                        |{' '}
+                      </Typography>
+                      <div>{dots}</div>
+                    </Box>
+                  )}
+                </Box>
               </Box>
-            </Box>
-          ))}
-        </Box>
-      </Scrollbar>
+            ))}
+          </Box>
+        </Scrollbar>
 
-      <Typography
-        variant="subtitle2"
-        sx={{
-          marginLeft: '30px',
-          marginBottom: '30px',
-          mt: '15px',
-          color: '#734A00',
-          fontFamily: 'Inter',
-          fontSize: '14px',
-          fontStyle: 'normal',
-          fontWeight: 400,
-          lineHeight: 'normal',
-          letterSpacing: '-0.3px',
-        }}
-      >
-        All customers
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="14"
-          height="15"
-          viewBox="0 0 14 8"
-          fill="none"
+        <Typography
+          variant="subtitle2"
+          sx={{
+            marginLeft: '30px',
+            marginBottom: '30px',
+            mt: '15px',
+            color: '#734A00',
+            fontFamily: 'Inter',
+            fontSize: '14px',
+            fontStyle: 'normal',
+            fontWeight: 400,
+            lineHeight: 'normal',
+            letterSpacing: '-0.3px',
+          }}
         >
-          <path
-            d="M2.91666 7.11162H11.0833M11.0833 7.11162L8.75 9.44496M11.0833 7.11162L8.75 4.77829"
-            stroke="#734A00"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
-      </Typography>
-    </Card>
+          All customers
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="14"
+            height="15"
+            viewBox="0 0 14 8"
+            fill="none"
+          >
+            <path
+              d="M2.91666 7.11162H11.0833M11.0833 7.11162L8.75 9.44496M11.0833 7.11162L8.75 4.77829"
+              stroke="#734A00"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </Typography>
+      </Card>
+    </Box>
   );
 }
 
