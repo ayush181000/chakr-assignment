@@ -27,7 +27,6 @@ export const SORT_OPTIONS = [
   { value: 'priceAsc', label: 'Price: Low-High' },
 ];
 export const GENDER_OPTIONS = ['Men', 'Women', 'Kids'];
-export const CATEGORY_OPTIONS = ['All', 'Shose', 'Apparel', 'Accessories'];
 export const RATING_OPTIONS = ['up4Star', 'up3Star', 'up2Star', 'up1Star'];
 export const PRICE_OPTIONS = [
   { value: 'below', label: 'Below $25' },
@@ -56,17 +55,6 @@ export default function ProductFilters({ openFilter, onOpenFilter, onCloseFilter
           <FormControlLabel key={item} control={<Checkbox />} label={item} />
         ))}
       </FormGroup>
-    </Stack>
-  );
-
-  const renderCategory = (
-    <Stack spacing={1}>
-      <Typography variant="subtitle2">Category</Typography>
-      <RadioGroup>
-        {CATEGORY_OPTIONS.map((item) => (
-          <FormControlLabel key={item} value={item} control={<Radio />} label={item} />
-        ))}
-      </RadioGroup>
     </Stack>
   );
 
@@ -168,8 +156,6 @@ export default function ProductFilters({ openFilter, onOpenFilter, onCloseFilter
         <Scrollbar>
           <Stack spacing={3} sx={{ p: 3 }}>
             {renderGender}
-
-            {renderCategory}
 
             {renderColors}
 

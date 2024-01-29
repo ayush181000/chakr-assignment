@@ -1,16 +1,18 @@
+/* eslint-disable import/no-extraneous-dependencies */
+// import { Line } from 'react-chartjs-2';
 import { faker } from '@faker-js/faker';
 
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Unstable_Grid2';
-// import Typography from '@mui/material/Typography';
+import { Box, Card, Typography } from '@mui/material';
 
 import Iconify from 'src/components/iconify';
 
+import { data } from '../chart';
 import AppTasks from '../app-tasks';
 import { customers } from '../customers';
 import AppSemicircle from '../app-semicircle';
 import AppOrderTimeline from '../app-order-timeline';
-import AppCurrentVisits from '../app-current-visits';
 import AppWebsiteVisits from '../app-website-visits';
 import AppWidgetSummary from '../app-widget-summary';
 import AppTrafficBySite from '../app-traffic-by-site';
@@ -21,6 +23,19 @@ import AppConversionRates from '../app-conversion-rates';
 // ----------------------------------------------------------------------
 
 export default function AppView() {
+  const chartData = {
+    labels: data.map((d) => d.Timestamp),
+    datasets: [
+      {
+        label: 'Users Gained ',
+        data: data.map((d) => d['Profit Percentage']),
+        backgroundColor: ['rgba(75,192,192,1)', '#ecf0f1', '#50AF95', '#f3ba2f', '#2a71d0'],
+        borderColor: 'black',
+        borderWidth: 2,
+      },
+    ],
+  };
+
   return (
     <Container maxWidth="xl">
       <Grid container spacing={2} columns={16}>
@@ -56,17 +71,214 @@ export default function AppView() {
         </Grid>
 
         <Grid xs={12} md={6} lg={8}>
-          <AppCurrentVisits
-            title="Current Visits"
-            chart={{
-              series: [
-                { label: 'America', value: 4344 },
-                { label: 'Asia', value: 5435 },
-                { label: 'Europe', value: 1443 },
-                { label: 'Africa', value: 4443 },
-              ],
-            }}
-          />
+          <Grid container spacing={1} columns={12} direction="column">
+            <Grid xs={12} md={12} lg={12}>
+              <Card sx={{ width: '100%', minHeight: '250px' }}>
+                {/* <Line
+                  data={chartData}
+                  options={{
+                    plugins: {
+                      legend: {
+                        display: false,
+                      },
+                    },
+                    // elements: {
+                    //   point: { radius: 0 },
+                    // },
+                  }}
+                /> */}
+              </Card>
+            </Grid>
+            <Grid xs={12} md={12} lg={12}>
+              <Grid
+                container
+                spacing={1}
+                columns={12}
+                direction="row"
+                sx={{ display: 'flex', width: '100%' }}
+              >
+                <Grid xs={12} lg={4}>
+                  <Card sx={{ width: '100%', flexGrow: 1, minHeight: '140px' }}>
+                    <Box
+                      sx={{
+                        display: 'flex',
+                        padding: '16px',
+                        flexDirection: 'column',
+                        alignItems: 'flex-start',
+                        gap: '16px',
+                        flex: '1 0 0',
+                        alignSelf: 'stretch',
+                        transform: 'translate(-4px,0px)',
+                      }}
+                    >
+                      <Typography
+                        sx={{
+                          color: '#7D7D7D',
+                          fontFamily: 'Inter',
+                          fontSize: '16px',
+                          fontStyle: 'normal',
+                          fontWeight: 600,
+                          lineHeight: 'normal',
+                          letterSpacing: '-0.4px',
+                        }}
+                      >
+                        Top month
+                      </Typography>
+                      <Typography
+                        sx={{
+                          color: '#734A00',
+                          fontFamily: 'Inter',
+                          fontSize: '24px',
+                          fontStyle: 'normal',
+                          fontWeight: 600,
+                          lineHeight: 'normal',
+                          letterSpacing: '-0.2px',
+                        }}
+                      >
+                        November
+                      </Typography>
+                      <Typography
+                        sx={{
+                          color: '#FFA500',
+                          fontFamily: 'Inter',
+                          fontSize: '16px',
+                          fontStyle: 'normal',
+                          fontWeight: 500,
+                          lineHeight: 'normal',
+                          letterSpacing: '-0.2px',
+                        }}
+                      >
+                        2019
+                      </Typography>
+                    </Box>
+                  </Card>
+                </Grid>
+                <Grid xs={12} lg={4}>
+                  <Card sx={{ width: '100%', flexGrow: 1, minHeight: '140px' }}>
+                    <Box
+                      sx={{
+                        display: 'flex',
+                        padding: '16px',
+                        flexDirection: 'column',
+                        alignItems: 'flex-start',
+                        flex: '1 0 0',
+                        alignSelf: 'stretch',
+                        transform: 'translate(-4px,0px)',
+                      }}
+                    >
+                      <Typography
+                        sx={{
+                          color: '#7D7D7D',
+                          fontFamily: 'Inter',
+                          fontSize: '16px',
+                          fontStyle: 'normal',
+                          fontWeight: 600,
+                          lineHeight: 'normal',
+                          letterSpacing: '-0.4px',
+                          mb: '20px',
+                        }}
+                      >
+                        Top year
+                      </Typography>
+                      <Typography
+                        sx={{
+                          color: '#734A00',
+                          fontFamily: 'Inter',
+                          fontSize: '24px',
+                          fontStyle: 'normal',
+                          fontWeight: 600,
+                          lineHeight: 'normal',
+                          letterSpacing: '-0.2px',
+                        }}
+                      >
+                        2023
+                      </Typography>
+                      <Typography
+                        sx={{
+                          color: '#454545',
+                          fontFamily: 'Inter',
+                          fontSize: '14px',
+                          fontStyle: 'normal',
+                          fontWeight: 400,
+                          lineHeight: 'normal',
+                          letterSpacing: '-0.3px',
+                        }}
+                      >
+                        96K sold so far
+                      </Typography>
+                    </Box>
+                  </Card>
+                </Grid>
+                <Grid lg={4}>
+                  <Card sx={{ width: '100%', minHeight: '140px' }}>
+                    <Box
+                      sx={{
+                        display: 'flex',
+                        padding: '16px',
+                        flexDirection: 'column',
+                        alignItems: 'flex-start',
+                        flex: '1 0 0',
+                        alignSelf: 'stretch',
+                        transform: 'translate(-4px,0px)',
+                      }}
+                    >
+                      <Typography
+                        sx={{
+                          color: '#7D7D7D',
+                          fontFamily: 'Inter',
+                          fontSize: '16px',
+                          fontStyle: 'normal',
+                          fontWeight: 600,
+                          lineHeight: 'normal',
+                          letterSpacing: '-0.4px',
+                          mb: '12px',
+                        }}
+                      >
+                        Top buyer
+                      </Typography>
+                      <img
+                        src="/avatar.png"
+                        alt="avatar"
+                        style={{
+                          width: '24px',
+                          height: '24px',
+                          borderRadius: '100px',
+                          marginBottom: '12px',
+                        }}
+                      />
+                      <Typography
+                        sx={{
+                          color: '#131313',
+                          fontFamily: 'Inter',
+                          fontSize: '12px',
+                          fontStyle: 'normal',
+                          fontWeight: 500,
+                          lineHeight: 'normal',
+                          letterSpacing: '-0.3px',
+                          mb: '6px',
+                        }}
+                      >
+                        Maggie Johnson
+                      </Typography>
+                      <Typography
+                        sx={{
+                          color: '#454545',
+                          fontFamily: 'Inter',
+                          fontSize: '10px',
+                          fontStyle: 'normal',
+                          fontWeight: 400,
+                          lineHeight: 'normal',
+                          letterSpacing: '-0.3px',
+                        }}
+                      >
+                        Oasis Organic Inc.
+                      </Typography>
+                    </Box>
+                  </Card>
+                </Grid>
+              </Grid>
+            </Grid>
+          </Grid>
         </Grid>
 
         <Grid xs={12} md={6} lg={8}>
