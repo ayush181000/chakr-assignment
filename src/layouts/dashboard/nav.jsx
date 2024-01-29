@@ -4,10 +4,8 @@ import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Drawer from '@mui/material/Drawer';
-import Button from '@mui/material/Button';
-import { TextField } from '@mui/material';
 import { alpha } from '@mui/material/styles';
-import Typography from '@mui/material/Typography';
+import { TextField, Typography } from '@mui/material';
 import ListItemButton from '@mui/material/ListItemButton';
 
 import { usePathname } from 'src/routes/hooks';
@@ -15,6 +13,7 @@ import { RouterLink } from 'src/routes/components';
 
 import { useResponsive } from 'src/hooks/use-responsive';
 
+import SvgColor from 'src/components/svg-color';
 // import Logo from 'src/components/logo';
 import Scrollbar from 'src/components/scrollbar';
 
@@ -45,32 +44,46 @@ export default function Nav({ openNav, onCloseNav }) {
     </Stack>
   );
 
-  const renderUpgrade = (
-    <Box sx={{ px: 2.5, pb: 3, mt: 10 }}>
-      <Stack alignItems="center" spacing={3} sx={{ pt: 5, borderRadius: 2, position: 'relative' }}>
+  const renderAccount = (
+    <Box sx={{ px: 2.5, pb: 3, mt: 10, display: 'flex' }}>
+      <img
+        src="/avatar.png"
+        alt="avatar"
+        style={{
+          width: '32px',
+          height: '32px',
+          borderRadius: '100px',
+          marginBottom: '12px',
+          marginRight: '20px',
+          marginLeft: '16px',
+        }}
+      />
+      <Box display="flex" flexDirection="column">
+        <Typography sx={{ fontSize: '16px', fontWeight: 700, letterSpacing: '-0.25px' }}>
+          Gustavo Xavier
+        </Typography>
         <Box
-          component="img"
-          src="/assets/illustrations/illustration_avatar.png"
-          sx={{ width: 100, position: 'absolute', top: -50 }}
-        />
-
-        <Box sx={{ textAlign: 'center' }}>
-          <Typography variant="h6">Get more?</Typography>
-
-          <Typography variant="body2" sx={{ color: 'text.secondary', mt: 1 }}>
-            From only $69
+          sx={{ borderRadius: '24px', background: '#FFCD71', padding: '0px 6px', width: '48px' }}
+        >
+          <Typography
+            sx={{
+              fontSize: '10px',
+              fontWeight: 700,
+              letterSpacing: '-0.25px',
+              textAlign: 'center',
+            }}
+          >
+            Admin
           </Typography>
         </Box>
+      </Box>
+    </Box>
+  );
 
-        <Button
-          href="https://material-ui.com/store/items/minimal-dashboard/"
-          target="_blank"
-          variant="contained"
-          color="inherit"
-        >
-          Upgrade to Pro
-        </Button>
-      </Stack>
+  const renderSettings = (
+    <Box sx={{ px: 2.5, pb: 3 }}>
+      <NavItem item={{ title: 'setting', path: '#', icon: icon('ic_settings') }} />
+      <NavItem item={{ title: 'logout', path: '#', icon: icon('ic_logout') }} color />
     </Box>
   );
 
@@ -110,13 +123,13 @@ export default function Nav({ openNav, onCloseNav }) {
 
       {renderSearchBar}
 
-      {/* {renderAccount} */}
-
       {renderMenu}
 
       <Box sx={{ flexGrow: 1 }} />
-
-      {renderUpgrade}
+      <Box>
+        {renderAccount}
+        {renderSettings}
+      </Box>
     </Scrollbar>
   );
 
@@ -134,6 +147,8 @@ export default function Nav({ openNav, onCloseNav }) {
             position: 'fixed',
             width: NAV.WIDTH,
             borderRight: (theme) => `dashed 1px ${theme.palette.divider}`,
+            backgroundColor: '#fff',
+            borderRadius: '16px',
           }}
         >
           {renderContent}
@@ -162,7 +177,7 @@ Nav.propTypes = {
 
 // ----------------------------------------------------------------------
 
-function NavItem({ item }) {
+function NavItem({ item, color }) {
   const pathname = usePathname();
 
   const active = item.path === pathname;
@@ -192,11 +207,18 @@ function NavItem({ item }) {
         {item.icon}
       </Box>
 
-      <Box component="span">{item.title} </Box>
+      <Box component="span" sx={color && { color: '#B01212' }}>
+        {item.title}{' '}
+      </Box>
     </ListItemButton>
   );
 }
 
+const icon = (name) => (
+  <SvgColor src={`/assets/icons/navbar/${name}.svg`} sx={{ width: 1, height: 1 }} />
+);
+
 NavItem.propTypes = {
   item: PropTypes.object,
+  color: PropTypes.string,
 };
