@@ -1,11 +1,11 @@
-/* eslint-disable import/no-extraneous-dependencies */
-// import { Line } from 'react-chartjs-2';
+import Chart from 'chart.js/auto';
+import { useEffect } from 'react';
 
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Unstable_Grid2';
 import { Box, Card, Typography } from '@mui/material';
 
-// import { data } from '../chart';
+import { data } from '../chart';
 import { chats } from '../chats';
 import AppChat from '../app-chat';
 import { customers } from '../customers';
@@ -17,19 +17,87 @@ import AppCustomersUpdate from '../app-customers-update';
 
 // ----------------------------------------------------------------------
 
+function aggregateByDate(d) {
+  const aggregatedData = {};
+
+  d.forEach((entry) => {
+    // Assuming entry is an object with 'timestamp' and 'profit' properties
+    const timestamp = entry.Timestamp;
+    const profit = entry['Profit Percentage'];
+
+    // Convert timestamp to date
+    const date = new Date(timestamp).toISOString().split('T')[0].split('-').splice(0, 2).join('-');
+    // console.log(date);
+
+    // Aggregate profits based on date
+    if (aggregatedData[date]) {
+      aggregatedData[date].profit += profit;
+      aggregatedData[date].entry += 1;
+    } else {
+      aggregatedData[date] = { profit, entry: 1 };
+    }
+  });
+
+  const resultArray = Object.entries(aggregatedData).map(([date, aggregatedProfit]) => ({
+    date,
+    aggregatedProfit: aggregatedProfit.profit / aggregatedProfit.entry,
+  }));
+
+  return resultArray;
+}
+
 export default function AppView() {
-  // const chartData = {
-  //   labels: data.map((d) => d.Timestamp),
-  //   datasets: [
-  //     {
-  //       label: 'Users Gained ',
-  //       data: data.map((d) => d['Profit Percentage']),
-  //       backgroundColor: ['rgba(75,192,192,1)', '#ecf0f1', '#50AF95', '#f3ba2f', '#2a71d0'],
-  //       borderColor: 'black',
-  //       borderWidth: 2,
-  //     },
-  //   ],
-  // };
+  useEffect(() => {
+    const chartData = aggregateByDate(data);
+
+    console.log(chartData);
+
+    const ctx = document.getElementById('myLineChart').getContext('2d');
+    const gradient = ctx.createLinearGradient(0, 0, 0, 300);
+    gradient.addColorStop(0, 'rgba(37, 205, 37, 0.4)');
+    gradient.addColorStop(1, 'rgba(37, 205, 37, 0)');
+    // eslint-disable-next-line no-unused-vars
+    const myLineChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: chartData.map((entry) => entry.date),
+        datasets: [
+          {
+            fill: {
+              target: 'origin',
+              above: gradient, // Use the gradient for the fill
+            },
+            label: 'My Data',
+            data: chartData.map((entry) => entry.aggregatedProfit),
+            borderColor: '#25CD25', // Line color
+            borderWidth: 2,
+            borderDash: [5, 5],
+            // Do not fill the area under the line
+          },
+        ],
+      },
+      options: {
+        elements: {
+          point: { radius: 0 },
+        },
+        scales: {
+          x: {
+            type: 'category',
+            title: {
+              display: true,
+              text: 'Time',
+            },
+          },
+          y: {
+            title: {
+              display: true,
+              text: 'Profite Percentage',
+            },
+          },
+        },
+      },
+    });
+  }, []);
 
   return (
     <Container maxWidth="xl">
@@ -70,7 +138,7 @@ export default function AppView() {
             <Grid xs={12} md={12} lg={12}>
               <Card sx={{ width: '100%', minHeight: '250px' }}>
                 {/* <Line
-                  data={chartData}
+                  data={newChartData}
                   options={{
                     plugins: {
                       legend: {
@@ -82,6 +150,7 @@ export default function AppView() {
                     // },
                   }}
                 /> */}
+                <canvas id="myLineChart" width="400" height="200" />
               </Card>
             </Grid>
             <Grid xs={12} md={12} lg={12}>
