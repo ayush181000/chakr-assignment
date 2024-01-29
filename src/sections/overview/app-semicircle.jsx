@@ -38,7 +38,7 @@ export default function AppSemicircle({ title, subheader, list, link, ...other }
           height: '102px',
           flexShrink: 0,
           paddingTop: '20px',
-          transform: 'translate(44px,0px)',
+          transform: 'translate(16px,0px)',
         }}
       >
         <svg
